@@ -15,7 +15,6 @@ int swap(int arr[], int index1, int index2) {
 }
 
 void bubbleSort(int arr[], int size) {
-    int temp;
     for (int i = 0; i < size - 1; ++i) {
         for (int j = size - 1; j > i; --j) {
             if (arr[j-1] > arr[j]) swap(arr, j, j-1);
@@ -24,7 +23,7 @@ void bubbleSort(int arr[], int size) {
 }
 
 void selectionSort(int arr[], int size) {
-    int index, temp;
+    int index;
 
     for (int i = 0; i < size-1; ++i) {
         index = i;
