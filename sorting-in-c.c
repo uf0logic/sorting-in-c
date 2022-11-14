@@ -48,40 +48,63 @@ void insertion_sort(int array[], int size) {
     }
 }
 
-/*
-void merge(int array[], int temp_array[], int start, int mid, int end) {
-    int i_temp = 0, i_lower = start, i_upper = mid+1;
+void merge(int array[], int start, int mid, int end)
+{
+    int i, j, k;
+    int n1 = mid - start + 1;
+    int n2 = end - mid;
 
-    while ((i_lower <= mid) && (i_upper <= end)) {
-        if (array[i_lower] < array[i_upper])
-            temp_array[i_temp++] = array[i_lower++];
-        else
-            temp_array[i_temp++] = array[i_upper++];
+    int left[n1], right[n2];
+
+    for (i = 0; i < n1; i++)
+        left[i] = array[start + i];
+    for (j = 0; j < n2; j++)
+        right[j] = array[mid + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = start;
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j]) {
+            array[k] = left[i];
+            i++;
+        }
+        else {
+            array[k] = right[j];
+            j++;
+        }
+        k++;
     }
 
-    if (i_lower <=  mid) {
-        for
+    while (i < n1) {
+        array[k] = left[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        array[k] = right[j];
+        j++;
+        k++;
     }
 }
 
-void merge_helper(int array[], int temp_array, int head, int tail) {
-    if (head == tail) return;
+void ms_helper(int array[], int start, int end)
+{
+    if (start < end) {
+        int m = start + (end - start) / 2;
 
-    int mid = (head + tail) / 2;
+        ms_helper(array, start, m);
+        ms_helper(array, m + 1, end);
 
-    merge_helper(array, temp_array, head, mid);
-    merge_helper(array, temp_array, mid+1, tail);
-
-    merge(array, temp_array, head, mid, tail);
+        merge(array, start, m, end);
+    }
 }
 
 void merge_sort(int array[], int size) {
-    int head = 0, tail = size-1;
-
-    merge_helper(array, temp_array, head, tail);
-    delete[] temp_array;
+    int head = 0, tail = size;
+    ms_helper(array,head,tail);
 }
-*/
 
 void qs_helper(int array[], int head, int tail) {
     int start = head;
@@ -107,7 +130,7 @@ void qs_helper(int array[], int head, int tail) {
         qs_helper(array, start, tail);
 }
 
-void quick_sort(int *array, int size) {
+void quick_sort(int array[], int size) {
     qs_helper(array, 0, size);
 }
 
@@ -119,6 +142,7 @@ int main() {
     //selection_sort(array,15);
     //insertion_sort(array,15);
     //quick_sort(array, 15);
+    //merge_sort(array,15);
 
     print_array(array, 15);
 
